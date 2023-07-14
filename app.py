@@ -22,13 +22,8 @@ def home():
 
 @app.route('/add-list', methods=['POST'])
 def add_list():
-    # movie = request.form.get('movie')
-    # print(movie)
-    # print(type(movie))
-    # data_json = json.loads(movie.replace("'", '"'))
-    # print(data_json)
-    movie = request.json
-    data = search_movie("9dcbbdc0af2f471264786a8eebb6b1e3", movie.get('title')) 
+    movie = request.form.get('movie')
+    data = search_movie("9dcbbdc0af2f471264786a8eebb6b1e3", movie)
     add_movie_to_watchlist(data)
     return 'success'
 
@@ -45,6 +40,7 @@ def watchlist():
     c.execute("SELECT * FROM movies")
     movies = [dict(row) for row in c.fetchall()]  # convert each row to a dictionary
     conn.close()
+    print(movies)
     return render_template('watchlist.html', movies=movies)
 
 @app.route('/history')
@@ -54,6 +50,15 @@ def history():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/delete-tables')
+def delete_tables():
+    conn = sqlite3.connect('watchlist.db')
+    c = conn.cursor()
+    c.execute("DROP TABLE movies")
+    conn.commit()
+    conn.close()
+    return 'success'
 
 if __name__ == '__main__':
     app.run(debug=True)

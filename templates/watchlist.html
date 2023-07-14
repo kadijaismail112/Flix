@@ -15,7 +15,7 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
+                    <a href="/">
                         FLIX
                     </a>
                 </li>
@@ -44,7 +44,7 @@
                         {% for movie in movies %}
                         <div class="movie-card">
                             <img src="{{ movie['image_url'] }}" alt="{{ movie['title'] }}" />
-                            <h2>{{ movie['title'] }}</h2>
+                            <h2>{{ movie.title }}</h2>
                             <p>{{ movie['overview'] }}</p>
                             <p>Rating: {{ movie['rating'] }}</p>
                             <p>Available on: {{ movie['platforms'] }}</p>
