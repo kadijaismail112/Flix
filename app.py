@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from main import add_movie_to_watchlist, search_movie, create_table
 import requests
+import sqlite3
 import json
 
 
@@ -38,7 +39,13 @@ def create_tables():
 
 @app.route('/watchlist')
 def watchlist():
-    return render_template('watchlist.html')
+    conn = sqlite3.connect('watchlist.db')
+    conn.row_factory = sqlite3.Row  # use sqlite3.Row to access columns by name
+    c = conn.cursor()
+    c.execute("SELECT * FROM movies")
+    movies = [dict(row) for row in c.fetchall()]  # convert each row to a dictionary
+    conn.close()
+    return render_template('watchlist.html', movies=movies)
 
 @app.route('/history')
 def history():
