@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Movie App</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="static/style.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body class="container-fluid">
+      <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        FLIX
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">History</a>
+                </li>
+                <li>
+                    <a href="#">Create Watchlist</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                            <div class="container-fluid py-5">
+                              <h1 class="display-5 fw-bold">Welcome to FLIX</h1>
+                              <p class="col-md-8 fs-4">FLIX is a movie app that allows you to search for movies and add them to your watchlist.</p>
+                              <button class="btn btn-primary btn-lg" type="button">Create Watchlist</button>
+                            </div>
+                          </div>
+                        <!-- <h1>Welcome to FLIX</h1>
+                        <p>FLIX is a movie app that allows you to search for movies and add them to your watchlist.</p> -->
+                      
+                        <h2> Popular Movies</h2>
+                        <ul class="scrollable">
+                            <!-- <li class="movie-card">
+                                <a href="https://www.themoviedb.org/movie/550?language=en-US">
+                                    <img src="https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg" alt="Fight Club" />
+                                </a>
+                                <h2>Fight Club</h2>
+                                <a href="https://www.themoviedb.org/movie/550?language=en-US">View Details</a>
+                            </li>
+                            <li class="movie-card">
+                                <a href="https://www.themoviedb.org/movie/603?language=en-US">
+                                    <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="The Matrix" />
+                                </a>
+                                <h2>The Matrix</h2>
+                                <a href="https://www.themoviedb.org/movie/603?language=en-US">View Details</a>
+                            </li>
+                            <li class="movie-card">
+                                <a href="https://www.themoviedb.org/movie/497?language=en-US">
+                                    <img src="https://image.tmdb.org/t/p/w500/udDVJXtAFsQ8DimrXkVFqy4DGEQ.jpg" alt="The Green Mile" />
+                                </a>
+                                <h2>The Green Mile</h2>
+                                <a href="https://www.themoviedb.org/movie/497?language=en-US">View Details</a>
+                            </li>
+                        </div> -->
+                            {% for movie in movies %}
+                            <div class="movie-card">
+                                <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" />
+                                <h2>{{ movie.title }}</h2>
+                                <p>{{ movie.overview }}</p>
+                            </div>
+                            {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      </div>
+    </body>
+</html>
