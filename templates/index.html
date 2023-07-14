@@ -20,13 +20,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Home</a>
+                    <a href="index.html">Home</a>
                 </li>
                 <li>
-                    <a href="#">History</a>
+                    <a href="history.html">History</a>
                 </li>
                 <li>
-                    <a href="#">Create Watchlist</a>
+                    <a href="watchlist.html">Watchlist</a>
                 </li>
             </ul>
         </div>
@@ -44,51 +44,48 @@
                               <button class="btn btn-primary btn-lg" type="button">Create Watchlist</button>
                             </div>
                           </div>
-                        <!-- <h1>Welcome to FLIX</h1>
-                        <p>FLIX is a movie app that allows you to search for movies and add them to your watchlist.</p> -->
                       
                         <h2> Popular Movies</h2>
                         <ul class="scrollable">
-                            <!-- <li class="movie-card">
-                                <a href="https://www.themoviedb.org/movie/550?language=en-US">
-                                    <img src="https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg" alt="Fight Club" />
-                                </a>
-                                <h2>Fight Club</h2>
-                                <a href="https://www.themoviedb.org/movie/550?language=en-US">View Details</a>
-                            </li>
-                            <li class="movie-card">
-                                <a href="https://www.themoviedb.org/movie/603?language=en-US">
-                                    <img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg" alt="The Matrix" />
-                                </a>
-                                <h2>The Matrix</h2>
-                                <a href="https://www.themoviedb.org/movie/603?language=en-US">View Details</a>
-                            </li>
-                            <li class="movie-card">
-                                <a href="https://www.themoviedb.org/movie/497?language=en-US">
-                                    <img src="https://image.tmdb.org/t/p/w500/udDVJXtAFsQ8DimrXkVFqy4DGEQ.jpg" alt="The Green Mile" />
-                                </a>
-                                <h2>The Green Mile</h2>
-                                <a href="https://www.themoviedb.org/movie/497?language=en-US">View Details</a>
-                            </li>
-                        </div> -->
                             {% for movie in movies %}
                             <div class="movie-card">
                                 <img src="{{ movie.poster_path }}" alt="{{ movie.title }}" />
                                 <h2>{{ movie.title }}</h2>
                                 <p>{{ movie.overview }}</p>
                                 <form>
-                                    <button>
+                                    <button value="{{ movie }}" onclick="addmovie()">
                                         Add Movie
                                     </button>
                                 </form>
                             </div>
-                            {% endfor %}
-                        
+                            {% endfor %} 
                     </div>
                 </div>
             </div>
         </div>
     </div>
       </div>
+      <script>
+        function addmovie() {
+            event.preventDefault();
+            console.log("addmovie", event.target.value);
+            let formData = new FormData();
+            formData.append("movie", event.target.value);
+            fetch("/add-list", {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    movie: event.target.value
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
+            .catch(error => {
+                console.log("Error:", error);
+            });
+        }
+      </script>
     </body>
 </html>
