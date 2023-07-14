@@ -122,35 +122,35 @@ def main():
         choice = input("Choose an option:\n1. Search Movie by Title\n2. Search Movie by Genre and Streaming Platforms\n"
         "3. Log off\n")
 
-    if choice == '1':
-        api_key = '9dcbbdc0af2f471264786a8eebb6b1e3'
-        movie_title = input('Enter a movie title: ')
-        create_table()
-        movie_info = search_movie(api_key, movie_title)
-        if movie_info:
-            add_movie_to_watchlist(movie_info)
-            print('Movie added to watchlist!')
-            print('Title:', movie_info['Title'])
-            print('Overview:', movie_info['Overview'])
-            print('Rating:', movie_info['Rating'])
-            platforms = movie_info['Streaming Platforms']
-            if platforms == 'Streaming information not available.':
-                print('Streaming Platforms: Not available')
+        if choice == '1':
+            api_key = '9dcbbdc0af2f471264786a8eebb6b1e3'
+            movie_title = input('Enter a movie title: ')
+            create_table()
+            movie_info = search_movie(api_key, movie_title)
+            if movie_info:
+                add_movie_to_watchlist(movie_info)
+                print('Movie added to watchlist!')
+                print('Title:', movie_info['Title'])
+                print('Overview:', movie_info['Overview'])
+                print('Rating:', movie_info['Rating'])
+                platforms = movie_info['Streaming Platforms']
+                if platforms == 'Streaming information not available.':
+                    print('Streaming Platforms: Not available')
+                else:
+                    print('Streaming Platforms:', ', '.join(platforms))
+                    print('Image:', movie_info['Image URL'])
             else:
-                print('Streaming Platforms:', ', '.join(platforms))
-                print('Image:', movie_info['Image URL'])
+                print('No movie found with that title.')
+
+        elif choice == '2':
+            search_by_genre_and_platform()
+
+        elif choice == '3':
+            print('Logging off...')
+            break
+
         else:
-            print('No movie found with that title.')
-
-    elif choice == '2':
-        search_by_genre_and_platform()
-
-    elif choice == '3':
-        print('Logging off...')
-        break
-
-    else:
-        print("Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.")
 
 
 def search_by_genre_and_platform():
@@ -175,29 +175,25 @@ def search_by_genre_and_platform():
             print('Movie added to watchlist!')
             regenerate_movie = False
             break
-
-
-new_movie = input("Do you want another movie option? (yes or no) ")
-if new_movie.lower().strip() == "no":
-print("No movies added to watchlist.")
-regenerate_movie = False
-break
-else:
-print("No recommended movies found for your streaming platform.")
-new_movie = input("Do you want to input different streaming platforms? (yes or no) ")
-if new_movie.lower().strip() == "no":
-print("No recommended movies found.")
-regenerate_movie = False
-break
-else:
-user_platforms = input("What streaming platforms do you have? ")
-genre = input("What movie genre are you interested in? ")
-
-
+        new_movie = input("Do you want another movie option? (yes or no) ")
+        if new_movie.lower().strip() == "no":
+            print("No movies added to watchlist.")
+            regenerate_movie = False
+            break
+        else:
+            print("No recommended movies found for your streaming platform.")
+            new_movie = input("Do you want to input different streaming platforms? (yes or no) ")
+            if new_movie.lower().strip() == "no":
+                print("No recommended movies found.")
+                regenerate_movie = False
+                break
+            else:
+                user_platforms = input("What streaming platforms do you have? ")
+                genre = input("What movie genre are you interested in? ")
 
 
 if __name__ == '__main__':
-main()
+    main()
 
 
 
